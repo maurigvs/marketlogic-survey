@@ -1,11 +1,13 @@
 package com.marketlogic.survey.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.*;
+import java.util.Objects;
 
 @Entity
-@Table(name = "surveys")
-public class Survey {
+@Table(name = "questions")
+public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,15 +15,18 @@ public class Survey {
 
     private String title;
 
-    @OneToMany(mappedBy = "survey")
-    private List<Question> questions = new ArrayList<>();
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "survey_id")
+    private Survey survey;
 
-    public Survey() {
+    public Question() {
     }
 
-    public Survey(Integer id, String title) {
+    public Question(Integer id, String title, Survey survey) {
         this.id = id;
         this.title = title;
+        this.survey = survey;
     }
 
     public Integer getId() {
@@ -40,20 +45,20 @@ public class Survey {
         this.title = title;
     }
 
-    public List<Question> getQuestions() {
-        return questions;
+    public Survey getSurvey() {
+        return survey;
     }
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Survey)) return false;
-        Survey survey = (Survey) o;
-        return Objects.equals(getId(), survey.getId());
+        if (!(o instanceof Question)) return false;
+        Question question = (Question) o;
+        return Objects.equals(getId(), question.getId());
     }
 
     @Override
@@ -63,7 +68,7 @@ public class Survey {
 
     @Override
     public String toString() {
-        return "Survey{" +
+        return "Question{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 '}';
