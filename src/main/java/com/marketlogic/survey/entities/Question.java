@@ -1,6 +1,7 @@
 package com.marketlogic.survey.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.marketlogic.survey.entities.enums.QuestionStatus;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -25,14 +26,17 @@ public class Question {
     @JoinColumn(name = "survey_id")
     private Survey survey;
 
+    private Integer status;
+
     public Question() {
     }
 
-    public Question(Integer id, String title, List<Choice> choices, Survey survey) {
+    public Question(Integer id, String title, QuestionStatus status, List<Choice> choices, Survey survey) {
         this.id = id;
         this.title = title;
         this.choices = choices;
         this.survey = survey;
+        setStatus(status);
     }
 
     public Integer getId() {
@@ -67,6 +71,14 @@ public class Question {
         this.survey = survey;
     }
 
+    public QuestionStatus getStatus() {
+        return QuestionStatus.valueOf(status);
+    }
+
+    public void setStatus(QuestionStatus status) {
+        this.status = status.getCode();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,6 +98,7 @@ public class Question {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", choices=" + choices +
+                ", status=" + getStatus() +
                 '}';
     }
 }

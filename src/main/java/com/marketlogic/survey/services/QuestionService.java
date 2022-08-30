@@ -2,6 +2,7 @@ package com.marketlogic.survey.services;
 
 import com.marketlogic.survey.entities.Choice;
 import com.marketlogic.survey.entities.Question;
+import com.marketlogic.survey.entities.enums.QuestionStatus;
 import com.marketlogic.survey.repositories.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class QuestionService {
             for (Choice choice : question.getChoices()) {
                 choice.setQuestion(question);
             }
+            question.setStatus(QuestionStatus.ENABLED);
             question.setChoices(choiceService.saveAll(question.getChoices()));
         }
         return questions;
