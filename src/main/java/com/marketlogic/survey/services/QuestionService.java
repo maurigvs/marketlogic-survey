@@ -29,4 +29,10 @@ public class QuestionService {
         }
         return questions;
     }
+
+    public Question disableQuestion(Integer id) {
+        Question question = repository.getReferenceById(id);
+        question.setStatus(QuestionStatus.DISABLED);
+        return repository.save(question);
+    }
 }
