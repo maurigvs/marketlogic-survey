@@ -66,6 +66,7 @@ public class Survey {
         return "Survey{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
+                ", questions=" + questions +
                 '}';
     }
 }

@@ -1,15 +1,12 @@
 package com.marketlogic.survey.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "questions")
-public class Question {
+@Table(name = "choices")
+public class Choice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,22 +14,18 @@ public class Question {
 
     private String title;
 
-    @OneToMany(mappedBy = "question")
-    private List<Choice> choices = new ArrayList<>();
-
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "survey_id")
-    private Survey survey;
+    @JoinColumn(name = "question_id")
+    private Question question;
 
-    public Question() {
+    public Choice() {
     }
 
-    public Question(Integer id, String title, List<Choice> choices, Survey survey) {
+    public Choice(Integer id, String title, Question question) {
         this.id = id;
         this.title = title;
-        this.choices = choices;
-        this.survey = survey;
+        this.question = question;
     }
 
     public Integer getId() {
@@ -51,27 +44,19 @@ public class Question {
         this.title = title;
     }
 
-    public List<Choice> getChoices() {
-        return choices;
+    public Question getQuestion() {
+        return question;
     }
 
-    public void setChoices(List<Choice> choices) {
-        this.choices = choices;
-    }
-
-    public Survey getSurvey() {
-        return survey;
-    }
-
-    public void setSurvey(Survey survey) {
-        this.survey = survey;
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Question)) return false;
-        Question question = (Question) o;
+        if (!(o instanceof Choice)) return false;
+        Choice question = (Choice) o;
         return Objects.equals(getId(), question.getId());
     }
 
@@ -82,10 +67,9 @@ public class Question {
 
     @Override
     public String toString() {
-        return "Question{" +
+        return "Choice{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", choices=" + choices +
                 '}';
     }
 }
