@@ -3,11 +3,12 @@ package com.marketlogic.survey.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "choices")
-public class Choice {
+public class Choice implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

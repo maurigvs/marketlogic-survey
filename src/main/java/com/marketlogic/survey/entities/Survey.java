@@ -1,11 +1,12 @@
 package com.marketlogic.survey.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
 @Table(name = "surveys")
-public class Survey {
+public class Survey implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -23,6 +23,7 @@ public class SurveyService {
     }
 
     public Survey createSurvey(Survey survey) {
+        validateCreation(survey);
         survey = repository.save(survey);
         for (Question question : survey.getQuestions()) {
             question.setSurvey(survey);
@@ -30,5 +31,18 @@ public class SurveyService {
         }
         survey.setQuestions(questionService.createQuestions(survey.getQuestions()));
         return survey;
+    }
+
+    private void validateCreation(Survey survey) {
+
+        if(survey.getQuestions().isEmpty()){
+            throw new IllegalArgumentException("Survey must have at least 1 question");
+        }
+
+        for (Question question : survey.getQuestions()) {
+            if(question.getChoices().isEmpty()){
+                throw new IllegalArgumentException("Question must have at least 1 choice");
+            }
+        }
     }
 }
