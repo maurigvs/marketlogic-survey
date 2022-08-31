@@ -2,8 +2,8 @@ package com.marketlogic.survey.entities.enums;
 
 public enum QuestionStatus {
 
-    ENABLED(0),
-    DISABLED(1);
+    ENABLED(1),
+    DISABLED(2);
 
     private int code;
 

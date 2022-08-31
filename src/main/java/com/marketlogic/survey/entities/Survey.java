@@ -19,9 +19,10 @@ public class Survey {
     public Survey() {
     }
 
-    public Survey(Integer id, String title) {
+    public Survey(Integer id, String title, List<Question> questions) {
         this.id = id;
         this.title = title;
+        this.questions = questions;
     }
 
     public Integer getId() {
@@ -59,14 +60,5 @@ public class Survey {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
-    }
-
-    @Override
-    public String toString() {
-        return "Survey{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", questions=" + questions +
-                '}';
     }
 }

@@ -31,7 +31,7 @@ public class Question {
     public Question() {
     }
 
-    public Question(Integer id, String title, QuestionStatus status, List<Choice> choices, Survey survey) {
+    public Question(Integer id, String title, List<Choice> choices, Survey survey, QuestionStatus status) {
         this.id = id;
         this.title = title;
         this.choices = choices;
@@ -90,15 +90,5 @@ public class Question {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
-    }
-
-    @Override
-    public String toString() {
-        return "Question{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", choices=" + choices +
-                ", status=" + getStatus() +
-                '}';
     }
 }

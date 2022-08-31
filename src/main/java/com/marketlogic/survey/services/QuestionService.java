@@ -18,14 +18,13 @@ public class QuestionService {
     @Autowired
     private ChoiceService choiceService;
 
-    public List<Question> saveAll(List<Question> questions){
+    public List<Question> createQuestions(List<Question> questions){
         questions = repository.saveAll(questions);
         for (Question question : questions) {
             for (Choice choice : question.getChoices()) {
                 choice.setQuestion(question);
             }
-            question.setStatus(QuestionStatus.ENABLED);
-            question.setChoices(choiceService.saveAll(question.getChoices()));
+            question.setChoices(choiceService.createChoices(question.getChoices()));
         }
         return questions;
     }

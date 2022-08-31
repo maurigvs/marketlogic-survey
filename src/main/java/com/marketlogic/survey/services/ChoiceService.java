@@ -13,7 +13,7 @@ public class ChoiceService {
     @Autowired
     private ChoiceRepository repository;
 
-    public List<Choice> saveAll(List<Choice> choices){
+    public List<Choice> createChoices(List<Choice> choices){
         return repository.saveAll(choices);
     }
 }

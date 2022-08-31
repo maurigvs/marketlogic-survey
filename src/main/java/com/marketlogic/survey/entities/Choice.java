@@ -1,6 +1,7 @@
 package com.marketlogic.survey.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -14,6 +15,8 @@ public class Choice {
 
     private String title;
 
+    private boolean correct;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "question_id")
@@ -22,9 +25,10 @@ public class Choice {
     public Choice() {
     }
 
-    public Choice(Integer id, String title, Question question) {
+    public Choice(Integer id, String title, boolean correct, Question question) {
         this.id = id;
         this.title = title;
+        this.correct = correct;
         this.question = question;
     }
 
@@ -44,6 +48,14 @@ public class Choice {
         this.title = title;
     }
 
+    public boolean isCorrect() {
+        return correct;
+    }
+
+    public void setCorrect(boolean correct) {
+        this.correct = correct;
+    }
+
     public Question getQuestion() {
         return question;
     }
@@ -56,20 +68,12 @@ public class Choice {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Choice)) return false;
-        Choice question = (Choice) o;
-        return Objects.equals(getId(), question.getId());
+        Choice choice = (Choice) o;
+        return Objects.equals(getId(), choice.getId());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getId());
-    }
-
-    @Override
-    public String toString() {
-        return "Choice{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                '}';
     }
 }
