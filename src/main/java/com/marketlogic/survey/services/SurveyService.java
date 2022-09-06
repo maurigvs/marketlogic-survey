@@ -37,6 +37,9 @@ public class SurveyService {
     }
 
     private void validateCreation(Survey survey) {
+        if(survey.getTitle().isBlank()){
+            throw new IllegalArgumentException("Survey title is missing");
+        }
         if(survey.getQuestions().isEmpty()){
             throw new IllegalArgumentException("Survey must have at least 1 question");
         }

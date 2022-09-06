@@ -24,7 +24,12 @@ public class ChoiceService {
 
     private void validateCreation(List<Choice> choices) {
         if(choices.stream().filter(c -> c.isCorrect()).collect(Collectors.toList()).size() == 0){
-            throw new IllegalArgumentException("Question must have at least 1 choice correct");
+            throw new IllegalArgumentException("At least 1 choice must be [correct=true]");
+        }
+        for(Choice c : choices){
+            if(c.getTitle().isBlank()){
+                throw new IllegalArgumentException("Choice title is missing");
+            }
         }
     }
 }

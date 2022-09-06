@@ -24,6 +24,7 @@ public class SurveyController {
     }
 
     @PostMapping
+    @ResponseBody
     public ResponseEntity<Survey> postSurvey(@RequestBody Survey survey){
         survey = service.createSurvey(survey);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().

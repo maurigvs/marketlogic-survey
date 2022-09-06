@@ -32,10 +32,9 @@ public class Question implements Serializable {
     public Question() {
     }
 
-    public Question(Integer id, String title, List<Choice> choices, Survey survey, QuestionStatus status) {
+    public Question(Integer id, String title, Survey survey, QuestionStatus status) {
         this.id = id;
         this.title = title;
-        this.choices = choices;
         this.survey = survey;
         setStatus(status);
     }

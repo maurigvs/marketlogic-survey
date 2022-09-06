@@ -22,10 +22,9 @@ public class Survey implements Serializable {
     public Survey() {
     }
 
-    public Survey(Integer id, String title, List<Question> questions) {
+    public Survey(Integer id, String title) {
         this.id = id;
         this.title = title;
-        this.questions = questions;
     }
 
     public Integer getId() {

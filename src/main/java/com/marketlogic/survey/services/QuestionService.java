@@ -22,6 +22,7 @@ public class QuestionService {
 
     @Transactional(propagation = Propagation.MANDATORY)
     public List<Question> createQuestions(List<Question> questions){
+        validateCreation(questions);
         questions = repository.saveAll(questions);
         for (Question question : questions) {
             for (Choice choice : question.getChoices()) {
@@ -36,5 +37,16 @@ public class QuestionService {
         Question question = repository.getReferenceById(id);
         question.setStatus(QuestionStatus.DISABLED);
         return repository.save(question);
+    }
+
+    private void validateCreation(List<Question> questions){
+        for(Question q : questions){
+            if(q.getTitle().isBlank()){
+                throw new IllegalArgumentException("Question title is missing");
+            }
+            if(q.getChoices().isEmpty()){
+                throw new IllegalArgumentException("Question must have at least 1 choice");
+            }
+        }
     }
 }
