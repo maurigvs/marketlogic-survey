@@ -6,6 +6,8 @@ import com.marketlogic.survey.entities.enums.QuestionStatus;
 import com.marketlogic.survey.repositories.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class QuestionService {
     @Autowired
     private ChoiceService choiceService;
 
+    @Transactional(propagation = Propagation.MANDATORY)
     public List<Question> createQuestions(List<Question> questions){
         questions = repository.saveAll(questions);
         for (Question question : questions) {

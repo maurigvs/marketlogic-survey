@@ -6,6 +6,8 @@ import com.marketlogic.survey.entities.enums.QuestionStatus;
 import com.marketlogic.survey.repositories.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class SurveyService {
         return repository.findAll();
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public Survey createSurvey(Survey survey) {
         validateCreation(survey);
         survey = repository.save(survey);
@@ -34,15 +37,8 @@ public class SurveyService {
     }
 
     private void validateCreation(Survey survey) {
-
         if(survey.getQuestions().isEmpty()){
             throw new IllegalArgumentException("Survey must have at least 1 question");
-        }
-
-        for (Question question : survey.getQuestions()) {
-            if(question.getChoices().isEmpty()){
-                throw new IllegalArgumentException("Question must have at least 1 choice");
-            }
         }
     }
 }
