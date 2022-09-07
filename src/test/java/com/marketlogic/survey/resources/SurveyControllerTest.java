@@ -40,8 +40,8 @@ class SurveyControllerTest {
         Survey survey1 = new Survey(null, "Survey Title 1");
         Survey survey2 = new Survey(null, "Survey Title 2");
         List<Survey> surveys = new ArrayList<>(Arrays.asList(survey1, survey2));
-
         when(service.findAll()).thenReturn(surveys);
+
         mockMvc.perform(get("/survey")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -51,8 +51,8 @@ class SurveyControllerTest {
     void postSurvey() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         Survey survey = new Survey(null, "Survey Title");
-
         when(service.createSurvey(any(Survey.class))).thenReturn(survey);
+
         mockMvc.perform(post("/survey")
                 .content(mapper.writeValueAsString(survey))
                 .contentType(MediaType.APPLICATION_JSON))

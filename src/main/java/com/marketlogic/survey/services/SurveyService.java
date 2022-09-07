@@ -26,7 +26,7 @@ public class SurveyService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public Survey createSurvey(Survey survey) {
-        validateCreation(survey);
+        checkRequiredArgs(survey);
         survey = repository.save(survey);
         for (Question question : survey.getQuestions()) {
             question.setSurvey(survey);
@@ -36,7 +36,7 @@ public class SurveyService {
         return survey;
     }
 
-    private void validateCreation(Survey survey) {
+    private void checkRequiredArgs(Survey survey) {
         if(survey.getTitle().isBlank()){
             throw new IllegalArgumentException("Survey title is missing");
         }
