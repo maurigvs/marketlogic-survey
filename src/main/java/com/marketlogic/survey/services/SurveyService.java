@@ -29,7 +29,7 @@ public class SurveyService {
     }
 
     public Survey createSurvey(Survey survey) {
-        checkRequiredArgs(survey);
+        //checkRequiredArgs(survey);
         for (Question q : survey.getQuestions()) {
             q.setSurvey(survey);
             q.setStatus(QuestionStatus.ENABLED.getCode());
@@ -38,14 +38,5 @@ public class SurveyService {
             }
         }
         return repository.save(survey);
-    }
-
-    private void checkRequiredArgs(Survey survey) {
-        if(survey.getTitle().isBlank()){
-            throw new IllegalArgumentException("Survey title is missing");
-        }
-        if(survey.getQuestions().isEmpty()){
-            throw new IllegalArgumentException("Survey must have at least 1 question");
-        }
     }
 }

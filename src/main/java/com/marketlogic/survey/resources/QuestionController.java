@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/question")
 public class QuestionController {
@@ -17,7 +19,7 @@ public class QuestionController {
     private QuestionService service;
 
     @PatchMapping(path = "/{id}/disable")
-    public ResponseEntity<Question> disableQuestion(@PathVariable Integer id){
+    public ResponseEntity<Question> disableQuestion(@PathVariable @Valid Integer id){
         Question question = service.disableQuestion(id);
         return ResponseEntity.ok().body(question);
     }
