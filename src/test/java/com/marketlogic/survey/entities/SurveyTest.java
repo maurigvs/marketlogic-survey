@@ -56,7 +56,7 @@ class SurveyTest {
         Question question = new Question("Question title", QuestionStatus.ENABLED.getCode(), survey);
         List<Question> questions = new ArrayList<>();
         questions.add(question);
-        survey.setQuestions(questions);
+        survey.getQuestions().addAll(questions);
         assertEquals(questions, survey.getQuestions());
     }
 }

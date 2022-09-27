@@ -2,9 +2,7 @@ package com.marketlogic.survey.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marketlogic.survey.entities.enums.QuestionStatus;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,6 +23,7 @@ public class Question implements Serializable {
     private String title;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Setter(AccessLevel.NONE)
     private List<Choice> choices = new ArrayList<>();
 
     private Integer status;

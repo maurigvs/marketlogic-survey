@@ -56,7 +56,7 @@ class QuestionTest {
         Choice choice = new Choice("Choice", question);
         List<Choice> choices = new ArrayList<>();
         choices.add(choice);
-        question.setChoices(choices);
+        question.getChoices().addAll(choices);
         assertEquals(choices, question.getChoices());
     }
 
