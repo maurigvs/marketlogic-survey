@@ -74,13 +74,13 @@ class QuestionTest {
 
     @Test
     void getStatus() {
-        assertInstanceOf(Integer.class, question.getStatus());
+        assertInstanceOf(QuestionStatus.class, question.getStatus());
     }
 
     @Test
     void setStatus() {
         question.setStatus(QuestionStatus.DISABLED.getCode());
-        assertInstanceOf(Integer.class, question.getStatus());
-        assertEquals(QuestionStatus.DISABLED.getCode(), question.getStatus());
+        assertInstanceOf(QuestionStatus.class, question.getStatus());
+        assertEquals(QuestionStatus.DISABLED, question.getStatus());
     }
 }

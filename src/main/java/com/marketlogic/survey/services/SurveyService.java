@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SurveyService {
@@ -22,6 +24,11 @@ public class SurveyService {
 
     public List<Survey> findAll(){
         return repository.findAll();
+    }
+
+    public Survey findById(Integer id) {
+        Optional<Survey> survey = repository.findById(id);
+        return survey.orElseThrow(() -> new EntityNotFoundException("Survey not found by Id"));
     }
 
     @Transactional(propagation = Propagation.REQUIRED)

@@ -19,8 +19,12 @@ public class SurveyController {
 
     @GetMapping
     public ResponseEntity<List<Survey>> getSurveys(){
-        List<Survey> surveys = service.findAll();
-        return ResponseEntity.ok().body(surveys);
+        return ResponseEntity.ok().body(service.findAll());
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Survey> getById(@PathVariable Integer id){
+        return ResponseEntity.ok().body(service.findById(id));
     }
 
     @PostMapping
