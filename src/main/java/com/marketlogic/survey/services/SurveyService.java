@@ -30,7 +30,7 @@ public class SurveyService {
         survey = repository.save(survey);
         for (Question question : survey.getQuestions()) {
             question.setSurvey(survey);
-            question.setStatus(QuestionStatus.ENABLED);
+            question.setStatus(QuestionStatus.ENABLED.getCode());
         }
         survey.setQuestions(questionService.createQuestions(survey.getQuestions()));
         return survey;

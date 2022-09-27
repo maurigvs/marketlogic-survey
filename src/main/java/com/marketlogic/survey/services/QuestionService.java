@@ -35,7 +35,7 @@ public class QuestionService {
 
     public Question disableQuestion(Integer id) {
         Question question = repository.getReferenceById(id);
-        question.setStatus(QuestionStatus.DISABLED);
+        question.setStatus(QuestionStatus.DISABLED.getCode());
         return repository.save(question);
     }
 

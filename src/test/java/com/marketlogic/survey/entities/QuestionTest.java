@@ -15,7 +15,7 @@ class QuestionTest {
 
     @BeforeEach
     void setUp() {
-        question = new Question(null, "Question title", new Survey(), QuestionStatus.ENABLED);
+        question = new Question("Question title", QuestionStatus.ENABLED.getCode(), new Survey());
     }
 
     @Test
@@ -42,7 +42,7 @@ class QuestionTest {
 
     @Test
     void getChoices() {
-        Choice choice = new Choice(null, "Choice", false, question);
+        Choice choice = new Choice("Choice", question);
         question.getChoices().add(choice);
 
         assertInstanceOf(List.class, question.getChoices());
@@ -53,7 +53,7 @@ class QuestionTest {
 
     @Test
     void setChoices() {
-        Choice choice = new Choice(null, "Choice", false, question);
+        Choice choice = new Choice("Choice", question);
         List<Choice> choices = new ArrayList<>();
         choices.add(choice);
         question.setChoices(choices);
@@ -67,36 +67,20 @@ class QuestionTest {
 
     @Test
     void setSurvey() {
-        Survey survey = new Survey(null, "Business Survey");
+        Survey survey = new Survey("Business Survey");
         question.setSurvey(survey);
         assertEquals(survey, question.getSurvey());
     }
 
     @Test
     void getStatus() {
-        assertInstanceOf(QuestionStatus.class, question.getStatus());
+        assertInstanceOf(Integer.class, question.getStatus());
     }
 
     @Test
     void setStatus() {
-        question.setStatus(QuestionStatus.DISABLED);
-        assertInstanceOf(QuestionStatus.class, question.getStatus());
-        assertEquals(QuestionStatus.DISABLED, question.getStatus());
-    }
-
-    @Test
-    void testEquals() {
-        question.setId(2);
-        Question otherQuestion = new Question(null, "Question title", new Survey(), QuestionStatus.ENABLED);
-        otherQuestion.setId(2);
-        assertEquals(question, otherQuestion);
-    }
-
-    @Test
-    void testHashCode() {
-        question.setId(2);
-        Question otherQuestion = new Question(null, "Question title", new Survey(), QuestionStatus.ENABLED);
-        otherQuestion.setId(2);
-        assertEquals(question.hashCode(), otherQuestion.hashCode());
+        question.setStatus(QuestionStatus.DISABLED.getCode());
+        assertInstanceOf(Integer.class, question.getStatus());
+        assertEquals(QuestionStatus.DISABLED.getCode(), question.getStatus());
     }
 }

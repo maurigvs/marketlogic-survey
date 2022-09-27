@@ -39,8 +39,8 @@ class SurveyServiceTest {
     @Test
     void findAll() {
         List<Survey> surveys = new ArrayList<>();
-        surveys.add(new Survey(null, "Survey 1"));
-        surveys.add((new Survey(null, "Survey 2")));
+        surveys.add(new Survey("Survey 1"));
+        surveys.add((new Survey("Survey 2")));
         when(repository.findAll()).thenReturn(surveys);
 
         List<Survey> saved = service.findAll();
@@ -49,10 +49,10 @@ class SurveyServiceTest {
 
     @Test
     void createSurvey() {
-        Survey survey = new Survey(1, "Test Survey");
-        Question q1 = new Question(1, "Question 1", survey, QuestionStatus.ENABLED);
-        Choice c1 = new Choice(1, "Choice 1", true, q1);
-        Choice c2 = new Choice(2, "Choice 2", true, q1);
+        Survey survey = new Survey("Test Survey");
+        Question q1 = new Question("Question 1", QuestionStatus.ENABLED.getCode(), survey);
+        Choice c1 = new Choice("Choice 1", q1);
+        Choice c2 = new Choice("Choice 2", q1);
         q1.getChoices().addAll(Arrays.asList(c1, c2));
         survey.getQuestions().add(q1);
         when(repository.save(any(Survey.class))).thenReturn(survey);
@@ -64,7 +64,7 @@ class SurveyServiceTest {
     @Test()
     void createSurveyWithoutTitle(){
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
-            Survey survey = new Survey(null, "");
+            Survey survey = new Survey("");
             survey = service.createSurvey(survey);
         });
         assertEquals("Survey title is missing", ex.getMessage());
@@ -73,7 +73,7 @@ class SurveyServiceTest {
     @Test()
     void createSurveyWithoutQuestions(){
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
-            Survey survey = new Survey(null, "Test Survey");
+            Survey survey = new Survey("Test Survey");
             survey = service.createSurvey(survey);
         });
         assertEquals("Survey must have at least 1 question", ex.getMessage());

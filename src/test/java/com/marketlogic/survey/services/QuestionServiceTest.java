@@ -39,15 +39,15 @@ class QuestionServiceTest {
     @Test
     void createQuestions() {
         List<Question> questions = new ArrayList<>();
-        Question q1 = new Question(1, "Question 1", new Survey(), QuestionStatus.ENABLED);
-        Choice c1 = new Choice(1, "Choice 1", true, q1);
-        Choice c2 = new Choice(2, "Choice 2", true, q1);
+        Question q1 = new Question( "Question 1", QuestionStatus.ENABLED.getCode(), new Survey());
+        Choice c1 = new Choice("Choice 1", q1);
+        Choice c2 = new Choice("Choice 2", q1);
         q1.getChoices().addAll(Arrays.asList(c1, c2));
         questions.add(q1);
 
-        Question q2 = new Question(2, "Question 2", new Survey(), QuestionStatus.ENABLED);
-        Choice c3 = new Choice(3, "Choice 3", true, q2);
-        Choice c4 = new Choice(4, "Choice 4", true, q2);
+        Question q2 = new Question("Question 2", QuestionStatus.ENABLED.getCode(), new Survey());
+        Choice c3 = new Choice("Choice 3",q2);
+        Choice c4 = new Choice("Choice 4",q2);
         q2.getChoices().addAll(Arrays.asList(c3, c4));
         questions.add(q2);
         when(repository.saveAll(anyList())).thenReturn(questions);
@@ -60,7 +60,7 @@ class QuestionServiceTest {
 
     @Test
     void disableQuestion() {
-        Question question = new Question(1, "Question 1", new Survey(), QuestionStatus.DISABLED);
+        Question question = new Question("Question 1", QuestionStatus.DISABLED.getCode(), new Survey());
         when(repository.getReferenceById(any(Integer.class))).thenReturn(question);
         when(repository.save(any(Question.class))).thenReturn(question);
 

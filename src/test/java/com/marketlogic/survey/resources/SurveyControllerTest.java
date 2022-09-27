@@ -37,8 +37,8 @@ class SurveyControllerTest {
 
     @Test
     void getSurveys() throws Exception {
-        Survey survey1 = new Survey(null, "Survey Title 1");
-        Survey survey2 = new Survey(null, "Survey Title 2");
+        Survey survey1 = new Survey("Survey Title 1");
+        Survey survey2 = new Survey( "Survey Title 2");
         List<Survey> surveys = new ArrayList<>(Arrays.asList(survey1, survey2));
         when(service.findAll()).thenReturn(surveys);
 
@@ -50,7 +50,7 @@ class SurveyControllerTest {
     @Test
     void postSurvey() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        Survey survey = new Survey(null, "Survey Title");
+        Survey survey = new Survey("Survey Title");
         when(service.createSurvey(any(Survey.class))).thenReturn(survey);
 
         mockMvc.perform(post("/survey")

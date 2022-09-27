@@ -1,13 +1,19 @@
 package com.marketlogic.survey.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "surveys")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Survey implements Serializable {
 
     @Id
@@ -19,48 +25,8 @@ public class Survey implements Serializable {
     @OneToMany(mappedBy = "survey")
     private List<Question> questions = new ArrayList<>();
 
-    public Survey() {
-    }
 
-    public Survey(Integer id, String title) {
-        this.id = id;
+    public Survey(String title) {
         this.title = title;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Survey)) return false;
-        Survey survey = (Survey) o;
-        return Objects.equals(getId(), survey.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
     }
 }

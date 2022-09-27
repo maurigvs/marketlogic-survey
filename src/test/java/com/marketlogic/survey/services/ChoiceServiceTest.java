@@ -33,8 +33,8 @@ class ChoiceServiceTest {
     void createChoices() {
         Question q = new Question();
         List<Choice> choices = new ArrayList<>();
-        choices.add(new Choice(1, "Choice 1", true, q));
-        choices.add(new Choice(2, "Choice 2", true, q));
+        choices.add(new Choice("Choice 1", q));
+        choices.add(new Choice("Choice 2", q));
         when(repository.saveAll(anyCollection())).thenReturn(choices);
 
         List<Choice> saved = service.createChoices(choices);

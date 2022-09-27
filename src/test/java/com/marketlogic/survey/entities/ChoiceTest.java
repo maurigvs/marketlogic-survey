@@ -12,7 +12,7 @@ class ChoiceTest {
 
     @BeforeEach
     void setUp() {
-        choice = new Choice(null, "Choice title", false, new Question());
+        choice = new Choice("Choice title", new Question());
     }
 
     @Test
@@ -44,24 +44,8 @@ class ChoiceTest {
 
     @Test
     void setQuestion() {
-        Question question = new Question(null, "Question title", new Survey(), QuestionStatus.ENABLED);
+        Question question = new Question( "Question title", QuestionStatus.ENABLED.getCode(), new Survey());
         choice.setQuestion(question);
         assertEquals(question, choice.getQuestion());
-    }
-
-    @Test
-    void testEquals() {
-        choice.setId(1);
-        Choice otherChoice = new Choice(null, "New choice title", false, new Question());
-        otherChoice.setId(1);
-        assertEquals(choice, otherChoice);
-    }
-
-    @Test
-    void testHashCode() {
-        choice.setId(1);
-        Choice otherChoice = new Choice(null, "New choice title", false, new Question());
-        otherChoice.setId(1);
-        assertEquals(choice.hashCode(), otherChoice.hashCode());
     }
 }

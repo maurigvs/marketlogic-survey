@@ -15,7 +15,7 @@ class SurveyTest {
 
     @BeforeEach
     void setUp() {
-        survey = new Survey(null, "Survey title");
+        survey = new Survey("Survey title");
     }
 
     @Test
@@ -42,7 +42,7 @@ class SurveyTest {
 
     @Test
     void getQuestions() {
-        Question question = new Question(null, "Question title", survey, QuestionStatus.ENABLED);
+        Question question = new Question("Question title", QuestionStatus.ENABLED.getCode(), survey);
         survey.getQuestions().add(question);
 
         assertInstanceOf(List.class, survey.getQuestions());
@@ -53,26 +53,10 @@ class SurveyTest {
 
     @Test
     void setQuestions() {
-        Question question = new Question(null, "Question title", survey, QuestionStatus.ENABLED);
+        Question question = new Question("Question title", QuestionStatus.ENABLED.getCode(), survey);
         List<Question> questions = new ArrayList<>();
         questions.add(question);
         survey.setQuestions(questions);
         assertEquals(questions, survey.getQuestions());
-    }
-
-    @Test
-    void testEquals() {
-        survey.setId(2);
-        Survey otherSurvey = new Survey(null, "Secondary Survey");
-        otherSurvey.setId(2);
-        assertEquals(survey, otherSurvey);
-    }
-
-    @Test
-    void testHashCode() {
-        survey.setId(2);
-        Survey otherSurvey = new Survey(null, "Secondary Survey");
-        otherSurvey.setId(2);
-        assertEquals(survey.hashCode(), otherSurvey.hashCode());
     }
 }

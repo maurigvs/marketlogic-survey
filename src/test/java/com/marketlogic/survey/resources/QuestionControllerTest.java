@@ -33,8 +33,9 @@ class QuestionControllerTest {
 
     @Test
     void disableQuestion() throws Exception {
-        Question question = new Question(1, "Question Title", new Survey(), QuestionStatus.DISABLED);
+        Question question = new Question("Question Title", QuestionStatus.DISABLED.getCode(), new Survey());
         when(service.disableQuestion(any(Integer.class))).thenReturn(question);
+
         mockMvc.perform(patch("/question/{id}/disable", 1)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
