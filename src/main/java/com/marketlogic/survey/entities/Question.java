@@ -24,7 +24,7 @@ public class Question implements Serializable {
 
     private String title;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Choice> choices = new ArrayList<>();
 
     private Integer status;

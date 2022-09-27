@@ -22,7 +22,7 @@ public class Survey implements Serializable {
 
     private String title;
 
-    @OneToMany(mappedBy = "survey")
+    @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Question> questions = new ArrayList<>();
 
 
