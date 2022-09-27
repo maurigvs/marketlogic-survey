@@ -16,8 +16,6 @@ public class Choice implements Serializable {
 
     private String title;
 
-    private boolean correct;
-
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "question_id")
@@ -29,7 +27,6 @@ public class Choice implements Serializable {
     public Choice(Integer id, String title, boolean correct, Question question) {
         this.id = id;
         this.title = title;
-        this.correct = correct;
         this.question = question;
     }
 
@@ -47,14 +44,6 @@ public class Choice implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public boolean isCorrect() {
-        return correct;
-    }
-
-    public void setCorrect(boolean correct) {
-        this.correct = correct;
     }
 
     public Question getQuestion() {

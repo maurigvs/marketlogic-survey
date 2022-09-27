@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ChoiceService {
@@ -23,9 +22,6 @@ public class ChoiceService {
     }
 
     private void validateCreation(List<Choice> choices) {
-        if(choices.stream().filter(c -> c.isCorrect()).collect(Collectors.toList()).size() == 0){
-            throw new IllegalArgumentException("At least 1 choice must be [correct=true]");
-        }
         for(Choice c : choices){
             if(c.getTitle().isBlank()){
                 throw new IllegalArgumentException("Choice title is missing");

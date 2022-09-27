@@ -38,17 +38,6 @@ class ChoiceTest {
     }
 
     @Test
-    void isCorrect() {
-        assertFalse(choice.isCorrect());
-    }
-
-    @Test
-    void setCorrect() {
-        choice.setCorrect(true);
-        assertTrue(choice.isCorrect());
-    }
-
-    @Test
     void getQuestion() {
         assertInstanceOf(Question.class, choice.getQuestion());
     }
