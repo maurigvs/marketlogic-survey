@@ -83,4 +83,14 @@ class QuestionTest {
         assertInstanceOf(QuestionStatus.class, question.getStatus());
         assertEquals(QuestionStatus.DISABLED, question.getStatus());
     }
+
+    @Test
+    void TestConstructorWithoutIdAndList(){
+        Question question = new Question("Question Title", QuestionStatus.ENABLED.getCode(), new Survey());
+        assertNull(question.getId());
+        assertEquals("Question Title", question.getTitle());
+        assertNotNull(question.getChoices());
+        assertEquals(QuestionStatus.ENABLED, question.getStatus());
+        assertNotNull(question.getSurvey());
+    }
 }

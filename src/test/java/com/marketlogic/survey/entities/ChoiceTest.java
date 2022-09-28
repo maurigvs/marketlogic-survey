@@ -44,8 +44,16 @@ class ChoiceTest {
 
     @Test
     void setQuestion() {
-        Question question = new Question( "Question title", QuestionStatus.ENABLED.getCode(), new Survey());
+        Question question = new Question("Question title", QuestionStatus.ENABLED.getCode(), new Survey());
         choice.setQuestion(question);
         assertEquals(question, choice.getQuestion());
+    }
+
+    @Test
+    void testConstructorWithoutId(){
+        choice = new Choice("New Choice Title", new Question());
+        assertNull(choice.getId());
+        assertEquals("New Choice Title", choice.getTitle());
+        assertNotNull(choice.getQuestion());
     }
 }

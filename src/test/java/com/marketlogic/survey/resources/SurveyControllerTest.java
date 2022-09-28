@@ -2,6 +2,8 @@ package com.marketlogic.survey.resources;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marketlogic.survey.entities.Survey;
+import com.marketlogic.survey.entities.dto.QuestionRequestDto;
+import com.marketlogic.survey.entities.dto.SurveyRequestDto;
 import com.marketlogic.survey.services.SurveyService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,15 +50,58 @@ class SurveyControllerTest {
     }
 
     @Test
+    void getById() throws Exception {
+        Integer id = 1;
+        Survey survey = new Survey("Survey Title 1");
+        when(service.findById(any(Integer.class))).thenReturn(survey);
+
+        mockMvc.perform(get("/survey/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     void postSurvey() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
+        SurveyRequestDto dto = new SurveyRequestDto("Survey Title");
+        dto.getQuestions().add(new QuestionRequestDto("Question 1", Arrays.asList("Choice 1", "Choice 2", "Choice 3")));
+
         Survey survey = new Survey("Survey Title");
-        when(service.createSurvey(any(Survey.class))).thenReturn(survey);
+        when(service.createSurvey(any(SurveyRequestDto.class))).thenReturn(survey);
 
         mockMvc.perform(post("/survey")
-                .content(mapper.writeValueAsString(survey))
+                .content(mapper.writeValueAsString(dto))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value(survey.getTitle()));
+    }
+
+    @Test
+    void postSurveyWithoutTitle() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        SurveyRequestDto dto = new SurveyRequestDto();
+        dto.getQuestions().add(new QuestionRequestDto("Question 1", Arrays.asList("Choice 1", "Choice 2", "Choice 3")));
+
+        Survey survey = new Survey("Survey Title");
+        when(service.createSurvey(any(SurveyRequestDto.class))).thenReturn(survey);
+
+        mockMvc.perform(post("/survey")
+                        .content(mapper.writeValueAsString(dto))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void postSurveyWithoutQuestions() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        SurveyRequestDto dto = new SurveyRequestDto("Survey Title");
+
+        Survey survey = new Survey("Survey Title");
+        when(service.createSurvey(any(SurveyRequestDto.class))).thenReturn(survey);
+
+        mockMvc.perform(post("/survey")
+                        .content(mapper.writeValueAsString(dto))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 }

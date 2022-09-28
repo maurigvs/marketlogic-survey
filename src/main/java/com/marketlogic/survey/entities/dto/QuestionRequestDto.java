@@ -20,4 +20,8 @@ public class QuestionRequestDto {
     @NotEmpty
     @Setter(AccessLevel.NONE)
     private List<String> choices = new ArrayList<>();
+
+    public QuestionRequestDto(String title) {
+        this.title = title;
+    }
 }

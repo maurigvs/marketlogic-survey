@@ -36,9 +36,9 @@ class QuestionControllerTest {
         Question question = new Question("Question Title", QuestionStatus.DISABLED.getCode(), new Survey());
         when(service.disableQuestion(any(Integer.class))).thenReturn(question);
 
-        mockMvc.perform(patch("/question/{id}/disable", 1)
+        mockMvc.perform(patch("/survey/question/{id}/disable", 1)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value(QuestionStatus.DISABLED.toString()));
+                .andExpect(jsonPath("$.title").value(question.getTitle()));
     }
 }

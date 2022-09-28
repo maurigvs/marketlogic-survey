@@ -44,7 +44,6 @@ class SurveyTest {
     void getQuestions() {
         Question question = new Question("Question title", QuestionStatus.ENABLED.getCode(), survey);
         survey.getQuestions().add(question);
-
         assertInstanceOf(List.class, survey.getQuestions());
         assertFalse(survey.getQuestions().isEmpty());
         assertEquals(1, survey.getQuestions().size());
@@ -58,5 +57,13 @@ class SurveyTest {
         questions.add(question);
         survey.getQuestions().addAll(questions);
         assertEquals(questions, survey.getQuestions());
+    }
+
+    @Test
+    void testConstructorWithTitle(){
+        survey = new Survey("Survey Title");
+        assertNull(survey.getId());
+        assertEquals("Survey Title", survey.getTitle());
+        assertNotNull(survey.getQuestions());
     }
 }

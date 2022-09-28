@@ -1,6 +1,9 @@
 package com.marketlogic.survey.entities.dto;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -10,7 +13,6 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class SurveyRequestDto {
 
     @NotBlank
@@ -20,4 +22,8 @@ public class SurveyRequestDto {
     @NotEmpty
     @Setter(AccessLevel.NONE)
     private List<QuestionRequestDto> questions = new ArrayList<>();
+
+    public SurveyRequestDto(String title) {
+        this.title = title;
+    }
 }
