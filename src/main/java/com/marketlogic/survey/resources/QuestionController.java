@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/question")
+@RequestMapping(value = "/survey/question")
 public class QuestionController {
 
     @Autowired

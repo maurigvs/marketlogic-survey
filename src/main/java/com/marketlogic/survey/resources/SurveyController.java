@@ -1,6 +1,7 @@
 package com.marketlogic.survey.resources;
 
 import com.marketlogic.survey.entities.Survey;
+import com.marketlogic.survey.entities.dto.SurveyRequestDto;
 import com.marketlogic.survey.services.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +31,8 @@ public class SurveyController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Survey> postSurvey(@RequestBody @Valid Survey survey){
-        survey = service.createSurvey(survey);
+    public ResponseEntity<Survey> postSurvey(@RequestBody @Valid SurveyRequestDto dto){
+        Survey survey = service.createSurvey(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(survey.getId()).toUri();
         return ResponseEntity.created(uri).body(survey);
     }

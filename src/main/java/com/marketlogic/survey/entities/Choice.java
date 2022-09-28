@@ -6,12 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "choices")
+@Table(name = "survey_choices")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,13 +19,11 @@ public class Choice implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
     private String title;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "question_id")
-    @NotNull
     private Question question;
 
 
