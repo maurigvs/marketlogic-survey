@@ -1,7 +1,6 @@
 package com.marketlogic.survey.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +11,6 @@ import java.io.Serializable;
 @Table(name = "survey_choices")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Choice implements Serializable {
 
     @Id
@@ -25,7 +23,6 @@ public class Choice implements Serializable {
     @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question;
-
 
     public Choice(String title, Question question) {
         this.title = title;

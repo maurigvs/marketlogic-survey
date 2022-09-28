@@ -2,7 +2,10 @@ package com.marketlogic.survey.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marketlogic.survey.entities.enums.QuestionStatus;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,7 +16,6 @@ import java.util.List;
 @Table(name = "survey_questions")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Question implements Serializable {
 
     @Id

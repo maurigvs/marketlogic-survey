@@ -1,6 +1,9 @@
 package com.marketlogic.survey.entities;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +14,6 @@ import java.util.List;
 @Table(name = "surveys")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Survey implements Serializable {
 
     @Id
@@ -23,7 +25,6 @@ public class Survey implements Serializable {
     @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
     @Setter(AccessLevel.NONE)
     private List<Question> questions = new ArrayList<>();
-
 
     public Survey(String title) {
         this.title = title;
