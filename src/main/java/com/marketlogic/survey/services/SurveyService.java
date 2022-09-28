@@ -35,13 +35,6 @@ public class SurveyService {
 
     public Survey createSurvey(SurveyRequestDto dto) {
         Survey survey = parseFromDto(dto);
-        for (Question q : survey.getQuestions()) {
-            q.setSurvey(survey);
-            q.setStatus(QuestionStatus.ENABLED.getCode());
-            for (Choice c : q.getChoices()) {
-                c.setQuestion(q);
-            }
-        }
         return repository.save(survey);
     }
 

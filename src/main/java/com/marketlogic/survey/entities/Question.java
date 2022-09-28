@@ -43,8 +43,4 @@ public class Question implements Serializable {
     public QuestionStatus getStatus() {
         return QuestionStatus.valueOf(status);
     }
-
-    public boolean isNotEnabled(){
-        return !QuestionStatus.ENABLED.equals(getStatus());
-    }
 }
